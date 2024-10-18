@@ -1,5 +1,5 @@
 resource "aws_eip" "eip_NGw" {
-  domain = true
+  domain = "vpc"
 
   tags = {
     Name = "pel_eip_NGw"
@@ -27,4 +27,10 @@ resource "aws_route_table" "private_rt" {
   tags = {
     Name = "pel_private_rt"
   }
+}
+
+resource "aws_route_table_association" "private_rt_association" {
+  count          = var.private_subnet_count
+  subnet_id      = element(aws_subnet.private_subnet[*].id, count.index)
+  route_table_id = aws_route_table.private_rt.id
 }

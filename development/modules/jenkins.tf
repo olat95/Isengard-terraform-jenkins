@@ -19,7 +19,7 @@ resource "aws_instance" "jenkins_instance" {
 }
 
 resource "aws_security_group" "jenkins_sg" {
-  vpc_id = aws_vpc.pel_vpc.id
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 8080

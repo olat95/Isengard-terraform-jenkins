@@ -1,6 +1,6 @@
 resource "aws_subnet" "public_subnet" {
-  vpc_id     = aws_vpc.pel_vpc.id
-  cidr_block = cidrsubnet(aws_vpc.pel_vpc.cidr_block, 8, 2 + count.index)
+  vpc_id     = var.vpc_id
+  cidr_block = cidrsubnet(var.vpc_cidr_block, 8, 2 + count.index)
 
   # Summary [cidrsubnet(base_cidr_block, new_subnet_mask_bits, subnet_number)]
   # Base CIDR block: The CIDR block of the VPC, e.g., 10.0.0.0/16.
@@ -21,8 +21,8 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  vpc_id                  = aws_vpc.pel_vpc.id
-  cidr_block              = cidrsubnet(aws_vpc.pel_vpc.cidr_block, 8, 2 + count.index)
+  vpc_id                  = var.vpc_id
+  cidr_block              = cidrsubnet(var.vpc_cidr_block, 8, 2 + count.index)
   availability_zone       = element(var.availability_zone, count.index)
   map_public_ip_on_launch = false
   count                   = var.private_subnet_count

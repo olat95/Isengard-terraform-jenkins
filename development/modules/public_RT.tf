@@ -19,7 +19,7 @@ resource "aws_route_table" "public_rt" {
   }
 }
 
-resource "aws_route_table_association" "public_rt_assoc" {
+resource "aws_route_table_association" "public_rt_association" {
   count     = var.public_subnet_count
   subnet_id = element(aws_subnet.public_subnet[*].id, count.index)
 
@@ -36,7 +36,6 @@ resource "aws_route_table_association" "public_rt_assoc" {
   # The first route table will be in the first public subnet.
   # The second route table will be in the second public subnet.
   # The third route table will be in the third public subnet.
-
 
   route_table_id = aws_route_table.public_rt.id
 }

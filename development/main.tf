@@ -37,5 +37,5 @@ module "pel_modules" {
   availability_zone    = var.availability_zone
   public_subnet_count  = var.public_subnet_count
   private_subnet_count = var.private_subnet_count
-  cidr_block           = var.cidr_block
+  vpc_cidr_block       = var.cidr_block
 }
